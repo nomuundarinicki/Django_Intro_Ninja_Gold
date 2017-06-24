@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Gold</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href={% static 'ninja_app/css/style.css'%}>
+  </head>
+  <body>
+      <div id="wrapper">
+          <p> Your GOLD: {{request.session}} </p>
+          <form action="/process_money" method="POST">
+          {% csrf_token %}
+              <h3> Farm </h3>
+              <p>(earns 10-20 gold)</p>
+              <input type="hidden" name="place" value="cave">
+              <button type="submit"> Find Gold!!</button>
+          </form>
+          <form action="/process_money" method="POST">
+          {% csrf_token %}
+             <h3> House </h3>
+             <p>(earns 2-5 gold)</p>
+             <input type="hidden" name="place" value="house">
+             <button type="submit"> Find Gold!! </button>
+          </form>
+          <form action="/process_money" method="POST">
+          {% csrf_token %}
+             <h3> Casino </h3>
+             <p>(earns 2-5 gold)</p>
+             <input type="hidden" name="place" value="casino">
+             <button type="submit"> Find Gold!! </button>
+          </form>
+          <h4> activities </h4>
+          <ul>
+            {% for each in request.session.activities %}
+            <li> {{ each }} </li>
+            {% endfor %}
+          </ul>
+      </div>
+  </body>
+  </html>
